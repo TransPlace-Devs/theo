@@ -12,7 +12,7 @@ exports.run = async (client, interaction, member) => {
 
     if (messages.size == 1) return interaction.reply({
         content: `You have not sent any messages in this channel yet, please answer the questions in the message above before clicking "Mention Verifiers."
-If, after reading the message above you, have any questions, please send your question then hit the "Mention Verifiers" button again.
+If have any questions after reading the message above, please send your question then hit the "Mention Verifiers" button again.
 Thank you ❤️`,
         ephemeral: true
     })
@@ -39,7 +39,6 @@ Thank you ❤️`,
     const diffInTime = Date.now() - interaction.user.createdAt;
     const diffInTimeJoined = Date.now() - interaction.member.joinedTimestamp;
 
-
     const logEmbed = new EmbedBuilder()
         .setAuthor({
             name: interaction.user.username + "#" + interaction.user.discriminator,
@@ -63,7 +62,7 @@ Thank you ❤️`,
             },
         ])
 
-    interaction.reply({
+    interaction.channel.send({
         content: `<@&${process.env.BETA_VERIFIED}>`,
         embeds: [logEmbed],
         allowedMentions: {

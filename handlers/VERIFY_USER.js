@@ -17,7 +17,7 @@ exports.run = async (client, interaction, member) => {
     await interaction.reply({
         content: `<@${threadName[1]}> has been verified`,
         allowedMentions: {
-            users: false,
+            users: [client.user.id],
         }
     })
 
@@ -148,16 +148,12 @@ exports.run = async (client, interaction, member) => {
                 "url": randomImage[Math.floor(Math.random() * randomImage.length)]
             }
         }],
-        allowedMentions: {
-            roles: true,
-            users: true,
-        }
     })
 
     let logMessage = await client.channels.cache.get(process.env.LOGS).send({
         content: `<@${interaction.user.id}> verified <@${threadName[1]}>.`,
         allowedMentions: {
-            users: false,
+            users: [client.user.id],
         }
     })
 

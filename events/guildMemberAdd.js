@@ -6,9 +6,8 @@ const {
 module.exports = async (client, member) => {
     if (member.user.bot) return
 
-    try {
-        member.send({
-            content: `**Hey 👋 Welcome to TransPlace, ${member.user.username}!**
+    member.send({
+        content: `**Hey 👋 Welcome to TransPlace, ${member.user.username}!**
         
 In order to join our community we require that you have a discord avatar set and have claimed your discord account. Claiming your account means you must have your your e-mail verified on discord and have set a user name and password.
 
@@ -18,18 +17,16 @@ Have fun in TransPlace! We're excited to have you join our wonderful community!
 
 Permanent invite link: https://discord.gg/TransPlace`,
 
-            components: [
-                new ActionRowBuilder().addComponents(
-                    new ButtonBuilder()
-                    .setURL(`https://discord.com/channels/959551566388547676/987358841245151262`)
-                    .setLabel("Join TransPlace!")
-                    .setStyle(5))
-            ]
+        components: [
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                .setURL(`https://discord.com/channels/959551566388547676/987358841245151262`)
+                .setLabel("Join TransPlace!")
+                .setStyle(5))
+        ]
 
-        })
-    } catch {
+    }).catch(err => {
         console.log(`Failed to DM the user with the ID: ${member.user.id}, perhaps they have DMs disabled?`)
-    }
+    })
 
-    
 }

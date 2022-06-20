@@ -147,7 +147,11 @@ exports.run = async (client, interaction, member) => {
             "image": {
                 "url": randomImage[Math.floor(Math.random() * randomImage.length)]
             }
-        }]
+        }],
+        allowedMentions: {
+            roles: true,
+            users: true,
+        }
     })
 
 }

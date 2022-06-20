@@ -84,9 +84,9 @@ exports.run = async (client, interaction, member) => {
         content: `<@${interaction.user.id}>`,
         embeds: [{
             title: 'Verification Ticket for ' + interaction.user.username + "#" + interaction.user.discriminator,
-            description: `Hi! Thank you for your patience with the verification process. As a part of the verification process, we ask that you answer the following questions. Do note that there are no right or wrong to answers these questions, but please try and give thorough/ detailed response. 
+            description: `Hi! Thank you for your patience with the verification process. As a part of the verification process, we ask that you answer the following questions. Do note that there are no right or wrong to answers these questions, but please try and give thorough / detailed responses. 
 
-***Please keep in mind that 1-3 word / simple answers will oftentimes require more questions to have you verified, please try and give thoughtful/ detailed responses to be verified quicker, no need to stress however if you cannot think of anything else to put, on behalf of our verification team thank you.*** :heart:
+***Please keep in mind that 1-5 word / simple answers will oftentimes require more questions to have you verified, please try and give thoughtful / detailed responses to be verified quicker, no need to stress however if you cannot think of anything else to put, on behalf of our verification team thank you.*** :heart:
 
 \`\`\`markdown
 1. Do you agree to the server rules and to respect the Discord Community Guidelines & Discord ToS?
@@ -106,7 +106,7 @@ exports.run = async (client, interaction, member) => {
 *(We may use this to help fast track your verification, but linking/sharing any accounts is not required)\`\`\`
 ***If you need any help or after you have answered all of the questions, please click the "Mention Verifiers" button below which will add our verifier staff to your thread.***`,
             footer: {
-                text: "After answering these questions, a member of the Verification Team may reach out if the answers to the above questions are incomplete or too vague. Thank you again for your patience and we can’t wait for you to join the TransPlace Discord. :heart:"
+                text: "After answering these questions, a member of the Verification Team may reach out if the answers to the above questions are incomplete or too vague. Thank you again for your patience and we can’t wait for you to join the TransPlace Discord."
             }
         }],
         components: [
@@ -177,7 +177,7 @@ exports.run = async (client, interaction, member) => {
         ])
 
 
-    client.channels.cache.get(process.env.LOGS).send({
+    let logMessage = await client.channels.cache.get(process.env.LOGS).send({
         embeds: [logEmbed],
         components: [
             new ActionRowBuilder().addComponents(
@@ -187,6 +187,12 @@ exports.run = async (client, interaction, member) => {
                 .setStyle(5),
             )
         ]
+    })
+
+    logMessage.startThread({
+        name: `${interaction.user.tag} Private Verifier Discussion Thread`,
+        autoArchiveDuration: 4320,
+        reason: 'Thread for verifier talks when verifying a user',
     })
 
 

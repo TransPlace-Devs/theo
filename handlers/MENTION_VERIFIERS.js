@@ -1,6 +1,7 @@
 const {
     ActionRowBuilder,
     ButtonBuilder,
+    EmbedBuilder,
 } = require('discord.js');
 
 exports.run = async (client, interaction, member) => {
@@ -10,7 +11,9 @@ exports.run = async (client, interaction, member) => {
     if (!messages) return
 
     if (messages.size == 1) return interaction.reply({
-        content: "You have not sent any messages in this channel yet, please answer the questions in the message above before clicking \"Mention Verifiers.\"\nIf after reading the message above you have any questions, please send your question then hit the \"Mention Verifiers\" button again.\nThank you :heart:",
+        content: `You have not sent any messages in this channel yet, please answer the questions in the message above before clicking "Mention Verifiers."
+If, after reading the message above you, have any questions, please send your question then hit the "Mention Verifiers" button again.
+Thank you ❤️`,
         ephemeral: true
     })
 
@@ -60,7 +63,7 @@ exports.run = async (client, interaction, member) => {
             },
         ])
 
-    interaction.channel.send({
+    interaction.reply({
         content: `<@&${process.env.BETA_VERIFIED}>`,
         embeds: [logEmbed],
         allowedMentions: {

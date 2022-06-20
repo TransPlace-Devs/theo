@@ -31,5 +31,5 @@ Permanent invite link: https://discord.gg/TransPlace`,
         console.log(`Failed to DM the user with the ID: ${member.user.id}, perhaps they have DMs disabled?`)
     }
 
-
+    
 }

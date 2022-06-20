@@ -6,10 +6,13 @@ const {
 exports.run = async (client, interaction, member) => {
 
     const messages = await interaction.channel.messages.fetch()
-    if(interaction.user.id == "280885861984239617") {
-        console.log(messages.size)
-        return
-    }
+    
+    if(messages) return
+
+    if(messages.size == 1) return interaction.reply({
+        content: "You have not sent any messages in this channel yet, please answer the questions in the message above before clicking \"Mention Verifiers.\"\nIf after reading the message above you have any questions, please send your question then hit the \"Mention Verifiers\" button again.\nThank you :heart:",
+        ephemeral: true
+    })
 
     interaction.update({
         components: [

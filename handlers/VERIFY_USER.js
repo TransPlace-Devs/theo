@@ -154,6 +154,13 @@ exports.run = async (client, interaction, member) => {
         }
     })
 
+    let logMessage = await client.channels.cache.get(process.env.LOGS).send({
+        content: `<@${interaction.user.id}> verified <@${threadName[1]}>.`,
+        allowedMentions: {
+            users: false,
+        }
+    })
+
 }
 
 exports.data = {}

@@ -90,8 +90,8 @@ exports.run = async (client, interaction, member) => {
     \`\`\`markdown
     1. Do you agree to the server rules and to respect the Discord Community Guidelines & Discord ToS?
     
-    2. Do you identify as transgender or any other part of the LGBTQ+ community? (Please be specific in your answer)
-    
+    2. Do you identify as transgender; and/or any other part of the LGBTQ+ community? (Please be specific in your answer)
+
     3. Do you have any friends who are already a part of our Discord? (If yes, please send their username)
     
     4. What’s your main goal / motivation in joining the TransPlace Discord?

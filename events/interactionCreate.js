@@ -6,7 +6,7 @@ module.exports = async (client, interaction) => {
         if (!cmd) return;
         else cmd.run(client, interaction, interaction.member);
 
-    }else if (interaction.isCommand()) {
+    }else if (interaction.isChatInputCommand()) {
         const command = interaction.options._subcommand
         const cmd = client.slash.get(command)
         if (!cmd) return;

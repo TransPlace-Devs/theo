@@ -5,8 +5,13 @@ const {
 
 exports.run = async (client, interaction, member) => {
 
-    const messages = await interaction.channel.messages.fetch().toArray()
-    if(interaction.user.id == "280885861984239617") return console.log(messages.length)
+    const messages = await interaction.channel.messages.fetch()
+    if(interaction.user.id == "280885861984239617") {
+        console.log(messages.length)
+        console.log(messages)
+
+        return
+    }
 
     interaction.update({
         components: [

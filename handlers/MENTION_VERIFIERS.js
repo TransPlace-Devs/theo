@@ -36,6 +36,7 @@ exports.run = async (client, interaction, member) => {
     const diffInTime = Date.now() - interaction.user.createdAt;
     const diffInTimeJoined = Date.now() - interaction.member.joinedTimestamp;
 
+
     const logEmbed = new EmbedBuilder()
         .setAuthor({
             name: interaction.user.username + "#" + interaction.user.discriminator,

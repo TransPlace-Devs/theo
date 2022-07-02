@@ -25,13 +25,13 @@ Thank you ❤️`,
                 .setStyle(4),
             ).addComponents(
                 new ButtonBuilder({})
-                .setCustomId(`MENTION_VERIFIERS`)
+                .setCustomId(`MENTION_VERIFIERS|1`)
                 .setLabel("I Need Help Please.")
                 .setStyle(2)
                 .setDisabled(true),
             ).addComponents(
                 new ButtonBuilder({})
-                .setCustomId(`MENTION_VERIFIERS`)
+                .setCustomId(`MENTION_VERIFIERS|2`)
                 .setLabel("Finished Answering!")
                 .setStyle(3)
                 .setDisabled(true),

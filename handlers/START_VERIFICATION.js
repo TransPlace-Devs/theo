@@ -33,12 +33,12 @@ exports.run = async (client, interaction, member) => {
                         .setStyle(4),
                     ).addComponents(
                         new ButtonBuilder({})
-                        .setCustomId(`MENTION_VERIFIERS`)
+                        .setCustomId(`MENTION_VERIFIERS|1`)
                         .setLabel("I Need Help Please.")
                         .setStyle(2),
                     ).addComponents(
                         new ButtonBuilder({})
-                        .setCustomId(`MENTION_VERIFIERS`)
+                        .setCustomId(`MENTION_VERIFIERS|2`)
                         .setLabel("Finished Answering!")
                         .setStyle(3),
                     )
@@ -121,12 +121,12 @@ exports.run = async (client, interaction, member) => {
                     .setStyle(4),
                 ).addComponents(
                     new ButtonBuilder({})
-                    .setCustomId(`MENTION_VERIFIERS`)
+                    .setCustomId(`MENTION_VERIFIERS|1`)
                     .setLabel("I Need Help Please.")
                     .setStyle(2),
                 ).addComponents(
                     new ButtonBuilder({})
-                    .setCustomId(`MENTION_VERIFIERS`)
+                    .setCustomId(`MENTION_VERIFIERS|2`)
                     .setLabel("Finished Answering!")
                     .setStyle(3),
                 )

@@ -24,7 +24,7 @@ exports.run = async (client, interaction, member) => {
         if (existingThread.archived) {
             existingThread.setArchived(false, "Unarchive by user")
             existingThread.send({
-                content: `<@${interaction.user.id}> Your thread has been reopened, please make sure the above questions are filled out correctly then hit the \`Mention Verifiers\` button below.`,
+                content: `<@${interaction.user.id}> Your thread has been reopened, please make sure the above questions are filled out correctly then hit the \`Finished Answering!\` button below.`,
                 components: [
                     new ActionRowBuilder().addComponents(
                         new ButtonBuilder({})
@@ -108,7 +108,7 @@ exports.run = async (client, interaction, member) => {
 # If you have any social media that contains relevant post history related to the LGBTQ+ community, please link it to your discord account or send the account name or URL. 
 
 *(We may use this to help fast track your verification, but linking/sharing any accounts is not required)\`\`\`
-***If you need any help or after you have answered all of the questions, please click the "Mention Verifiers" button below which will add our verifier staff to your thread.***`,
+***If you need any help please click the "I Need Help Please." button and our verifiers will be added to your thread to help you.\nAfter you have answered all of the questions, please click the "Finished Answering!" button below which will add our verifier staff to your thread.***`,
                 footer: {
                     text: "After answering these questions, a member of the Verification Team may reach out if the answers to the above questions are incomplete or too vague. Thank you again for your patience and we can’t wait for you to join the TransPlace Discord."
                 }
@@ -122,7 +122,12 @@ exports.run = async (client, interaction, member) => {
                 ).addComponents(
                     new ButtonBuilder({})
                     .setCustomId(`MENTION_VERIFIERS`)
-                    .setLabel("Mention Verifiers")
+                    .setLabel("I Need Help Please.")
+                    .setStyle(2),
+                ).addComponents(
+                    new ButtonBuilder({})
+                    .setCustomId(`MENTION_VERIFIERS`)
+                    .setLabel("Finished Answering!")
                     .setStyle(3),
                 )
             ]

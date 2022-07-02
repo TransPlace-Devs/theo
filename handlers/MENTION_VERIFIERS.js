@@ -11,8 +11,7 @@ exports.run = async (client, interaction, member) => {
     if (!messages) return
 
     if (messages.size == 1) return interaction.reply({
-        content: `You have not sent any messages in this channel yet, please answer the questions in the message above before clicking "Mention Verifiers."
-If have any questions after reading the message above, please send your question then hit the "Mention Verifiers" button again.
+        content: `You have not sent any messages in this channel yet, please answer the questions in the message above before clicking "Finished Answering!" or ask a question before clicking "I Need Help Please."
 Thank you ❤️`,
         ephemeral: true
     })

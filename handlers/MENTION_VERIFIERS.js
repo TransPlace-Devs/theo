@@ -44,6 +44,9 @@ Thank you ❤️`,
     const diffInTime = Date.now() - interaction.user.createdAt;
     const diffInTimeJoined = Date.now() - interaction.member.joinedTimestamp;
 
+    let helpMessage = "Please verify the user"
+    if(interaction.customId.split("|")[1] == "1") helpMessage = "Please help the user"
+
     const logEmbed = new EmbedBuilder()
         .setAuthor({
             name: interaction.user.username + "#" + interaction.user.discriminator,
@@ -51,7 +54,7 @@ Thank you ❤️`,
                 forceStatic: false
             })
         })
-        .setDescription(`<@&${process.env.BETA_VERIFIED}> Please verify the user ${interaction.user.tag}`)
+        .setDescription(`<@&${process.env.BETA_VERIFIED}> ${helpMessage} ${interaction.user.tag}`)
         .setTimestamp()
         .setFooter({
             text: client.user.username + "#" + client.user.discriminator,

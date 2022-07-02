@@ -34,7 +34,12 @@ exports.run = async (client, interaction, member) => {
                     ).addComponents(
                         new ButtonBuilder({})
                         .setCustomId(`MENTION_VERIFIERS`)
-                        .setLabel("Mention Verifiers")
+                        .setLabel("I Need Help Please.")
+                        .setStyle(2),
+                    ).addComponents(
+                        new ButtonBuilder({})
+                        .setCustomId(`MENTION_VERIFIERS`)
+                        .setLabel("Finished Answering!")
                         .setStyle(3),
                     )
                 ]

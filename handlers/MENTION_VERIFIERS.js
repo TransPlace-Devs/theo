@@ -27,9 +27,15 @@ Thank you ❤️`,
             ).addComponents(
                 new ButtonBuilder({})
                 .setCustomId(`MENTION_VERIFIERS`)
-                .setLabel("Mention Verifiers")
-                .setDisabled(true)
-                .setStyle(2),
+                .setLabel("I Need Help Please.")
+                .setStyle(2)
+                .setDisabled(true),
+            ).addComponents(
+                new ButtonBuilder({})
+                .setCustomId(`MENTION_VERIFIERS`)
+                .setLabel("Finished Answering!")
+                .setStyle(3)
+                .setDisabled(true),
             )
         ]
     })

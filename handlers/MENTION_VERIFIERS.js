@@ -6,7 +6,10 @@ const {
 
 exports.run = async (client, interaction, member) => {
 
-    if(interaction.user.id != interaction.channel.name.split(" | ")[1]) return interaction.reply("You are not allowed to use this command, this can only be used by the thread owner.");
+    if(interaction.user.id != interaction.channel.name.split(" | ")[1]) return interaction.reply({
+        content: "You are not allowed to use this command, this can only be used by the thread owner.",
+        ephemeral: true
+    });
 
     const messages = await interaction.channel.messages.fetch()
 

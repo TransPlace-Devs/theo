@@ -59,4 +59,22 @@ module.exports = async (client) => {
     //         .setStyle(3))]
     // })
 
+    let commands = {
+        name: "theo",
+        description: `Theo's command`,
+        options: [{
+            name: "old",
+            description: "Check the old verification of a user",
+            type: 1,
+            options: [{
+                name: "query",
+                description: "What is the query you would like to use?",
+                type: 3,
+                required: true,
+            }]
+        }]
+    }
+
+    client.guilds.cache.get(process.env.GUILD).commands.create(commands);
+
 }

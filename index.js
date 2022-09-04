@@ -12,6 +12,7 @@ const client = new Discord.Client({
 require("dotenv").config()
 
 client.handlers = new Discord.Collection();
+client.slash = new Discord.Collection();
 
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
@@ -37,6 +38,15 @@ fs.readdir("./handlers/", (err, files) => {
         let handlerName = f.split(".")[0];
         let pull = require(`./handlers/${handlerName}`);
         client.handlers.set(handlerName, pull);
+    });
+});
+
+fs.readdir("./slash/", (err, files) => {
+    if (err) return console.error(err);
+    files.forEach(f => {
+        let handlerName = f.split(".")[0];
+        let pull = require(`./slash/${handlerName}`);
+        client.slash.set(handlerName, pull);
     });
 });
 

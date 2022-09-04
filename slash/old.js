@@ -22,7 +22,7 @@ exports.run = async (client, interaction, member) => {
         auth
     });
 
-    // try {
+    try {
         let response = await driveService.files.list({
             maxResults: 1,
             q: `mimeType=\'text/plain\' and name contains '${userID}'`,
@@ -40,9 +40,9 @@ exports.run = async (client, interaction, member) => {
                 name: `${response.data.files[0].name.match(/\(([^)]+)\)/)[1]} verification log.txt`
             }],
         });
-    // } catch {
-    //     interaction.editReply('404 File not found')
-    // }
+    } catch {
+        interaction.editReply('404 File not found')
+    }
 
 }
 

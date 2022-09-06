@@ -11,6 +11,8 @@ exports.run = async (client, interaction, member) => {
         content: "You've already been verified silly",
         ephemeral: true
     });
+    
+    if(!interaction.channel) return
 
     let threads = interaction.channel.threads
 

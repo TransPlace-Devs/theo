@@ -7,6 +7,8 @@ module.exports = async (client, member) => {
     if (member.user.bot) return
 
     // Check if they have a thread open, and if so close it.
+    
+    if(!member.guild.channel) return
 
     const existingThread = member.guild.channel.threads.cache.find(x => {
         if (splitUp[1] == member.user.id) return splitUp[1]

@@ -9,6 +9,11 @@ exports.run = async (client, interaction, member) => {
     })
 
     let guildMember = await interaction.guild.members.fetch(threadName[1]);
+    if(!guildMember) return interaction.reply({
+    content: "Member is no longer apart of guild.",
+    ephemeral: true
+    })
+    
     let role = await interaction.guild.roles.fetch(process.env.VERIFIED_ROLE);
 
     // Add the verified role to the user

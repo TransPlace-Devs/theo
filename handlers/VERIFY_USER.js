@@ -26,11 +26,13 @@ exports.run = async (client, interaction, member) => {
                     new ButtonBuilder({})
                     .setCustomId(`MENTION_VERIFIERS|1`)
                     .setLabel("I Need Help Please.")
+                    .setDisabled(true)
                     .setStyle(2),
                 ).addComponents(
                     new ButtonBuilder({})
                     .setCustomId(`MENTION_VERIFIERS|2`)
                     .setLabel("Finished Answering!")
+                    .setDisabled(true)
                     .setStyle(3),
                 )
             ]

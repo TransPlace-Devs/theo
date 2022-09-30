@@ -27,7 +27,7 @@ exports.run = async (client, interaction, options) => {
 
     // DM The user with the reason
     guildMember.send({
-        content: `Your verification has been denied from **${interaction.guild.name}** for the following reason:\n\`\`\`${user_reason}\`\`\``,
+        content: `Your verification ticket within **${interaction.guild.name}** has been denied for the following reason:\n\`\`\`${user_reason}\`\`\``,
     }).catch(() => unable = true)
 
     guildMember.kick("Member was kicked during verification")

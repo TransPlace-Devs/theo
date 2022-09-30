@@ -10,7 +10,7 @@
   "author": "Cleo, Cleo#1003, Cleover",
   "license": "LGPL-3.0+",
   "dependencies": {
-    "discord.js": "^14.0.0-dev.1655381041-4df491c",
+    "discord.js": "^14.6.0-dev.1664539481-3c231ae.0",
     "dotenv": "^16.0.1",
     "googleapis": "^105.0.0"
   }

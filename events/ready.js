@@ -3,6 +3,11 @@
 //     ButtonBuilder,
 // } = require('discord.js');
 
+const {
+    ContextMenuCommandBuilder,
+    ApplicationCommandType
+} = require('discord.js');
+
 module.exports = async (client) => {
     console.log("Bot started!");
     // client.updateSlashCommands(process.env.GUILD);
@@ -59,22 +64,33 @@ module.exports = async (client) => {
     //         .setStyle(3))]
     // })
 
-    let commands = {
-        name: "theo",
-        description: `Theo's command`,
-        options: [{
-            name: "old",
-            description: "Check the old verification of a user",
-            type: 1,
+    let commands = [{
+            name: "theo",
+            description: `Theo's command`,
             options: [{
-                name: "query",
-                description: "What is the query you would like to use?",
-                type: 3,
-                required: true,
+                name: "old",
+                description: "Check the old verification of a user",
+                type: 1,
+                options: [{
+                    name: "query",
+                    description: "What is the query you would like to use?",
+                    type: 3,
+                    required: true,
+                }]
             }]
-        }]
-    }
+        },
+        new ContextMenuCommandBuilder()
+        .setName('Edit Message')
+        .setType(ApplicationCommandType.Message)
+        .setDefaultMemberPermissions(null),
+        new ContextMenuCommandBuilder()
+        .setName('Delete Message')
+        .setType(ApplicationCommandType.Message)
+        .setDefaultMemberPermissions(null)
+    ]
 
-    client.guilds.cache.get(process.env.GUILD).commands.create(commands);
+    commands.forEach(async command => {
+        await client.guilds.cache.get(process.env.GUILD).commands.create(command)
+    })
 
 }

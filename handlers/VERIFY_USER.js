@@ -1,3 +1,8 @@
+const {
+    ActionRowBuilder,
+    ButtonBuilder
+} = require('discord.js');
+
 exports.run = async (client, interaction, member) => {
     let threadName = interaction.channel.name.split(" | ")
     if (threadName.length != 2) return
@@ -7,6 +12,37 @@ exports.run = async (client, interaction, member) => {
         content: "You are not a verifier",
         ephemeral: true
     })
+
+    // Check the message button count
+    if (interaction.message.components[0].components[0].data.custom_id == "VERIFY_USER") {
+        // Update to the new embed
+
+        interaction.message.edit({
+            components: [
+                new ActionRowBuilder().addComponents(
+                    new ButtonBuilder({})
+                    .setCustomId(`VERIFIER_ACTIONS`)
+                    .setLabel("Verifier Actions (Staff Only)")
+                    .setStyle(4),
+                ).addComponents(
+                    new ButtonBuilder({})
+                    .setCustomId(`MENTION_VERIFIERS|1`)
+                    .setLabel("I Need Help Please.")
+                    .setStyle(2),
+                ).addComponents(
+                    new ButtonBuilder({})
+                    .setCustomId(`MENTION_VERIFIERS|2`)
+                    .setLabel("Finished Answering!")
+                    .setStyle(3),
+                )
+            ]
+        })
+
+        interaction.reply({
+            content: "This action was not performed as the embed buttons were on a older version. Please try again with the new buttons.",
+            ephemeral: true
+        })
+    }
 
     let guildMember = await interaction.guild.members.fetch(threadName[1]);
     if(!guildMember) return interaction.reply({

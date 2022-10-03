@@ -117,10 +117,10 @@ exports.run = async (client, interaction, member) => {
             }],
             components: [
                 new ActionRowBuilder().addComponents(
-                    new ButtonBuilder({})
-                    .setCustomId(`VERIFY_USER`)
-                    .setLabel("Verify User (Staff Only)")
-                    .setStyle(4),
+                        new ButtonBuilder({})
+                        .setCustomId(`VERIFIER_ACTIONS`)
+                        .setLabel("Verifier Actions (Staff Only)")
+                        .setStyle(4),
                 ).addComponents(
                     new ButtonBuilder({})
                     .setCustomId(`MENTION_VERIFIERS|1`)

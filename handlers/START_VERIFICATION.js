@@ -3,6 +3,7 @@ const {
     ButtonBuilder,
     EmbedBuilder
 } = require('discord.js');
+const { escape } = require('../utils/markdown');
 
 exports.run = async (client, interaction, member) => {
 
@@ -77,11 +78,7 @@ exports.run = async (client, interaction, member) => {
         }
     } else {
         let newThread = await threads.create({
-            invitable: false,
             name: `${interaction.user.tag} | ${interaction.user.id}`,
-            autoArchiveDuration: 4320,
-            reason: 'Thread for verifying a user',
-            type: 12,
         });
 
         const url = `https://canary.discord.com/channels/959551566388547676/${newThread.id}`
@@ -89,7 +86,7 @@ exports.run = async (client, interaction, member) => {
         newThread.send({
             content: `<@${interaction.user.id}>`,
             embeds: [{
-                title: 'Verification Ticket for ' + interaction.user.username + "#" + interaction.user.discriminator,
+                title: 'Verification Ticket for ' + escape(interaction.user.username) + "#" + interaction.user.discriminator,
                 description: `Hi! Thank you for your patience with the verification process. As a part of the verification process, we ask that you answer the following questions. Do note that there are no right or wrong to answers these questions, but please try and give thorough / detailed responses. 
     
 ***Please keep in mind that 1-5 word / simple answers will oftentimes require more questions to have you verified, please try and give thoughtful / detailed responses to be verified quicker, no need to stress however if you cannot think of anything else to put, on behalf of our verification team thank you.*** :heart:
@@ -163,7 +160,7 @@ exports.run = async (client, interaction, member) => {
                     forceStatic: false
                 })
             })
-            .setDescription('A new verification ticket has been created for ' + interaction.user.username + "#" + interaction.user.discriminator)
+            .setDescription('A new verification ticket has been created for ' + escape(interaction.user.username) + "#" + interaction.user.discriminator)
             .setTimestamp()
             .setFooter({
                 text: client.user.username + "#" + client.user.discriminator,
@@ -171,7 +168,7 @@ exports.run = async (client, interaction, member) => {
             })
             .addFields([{
                     name: 'User Information',
-                    value: `${interaction.user.username}#${interaction.user.discriminator} (${interaction.user.id}) <@${interaction.user.id}>`
+                    value: `${escape(interaction.user.username)}#${interaction.user.discriminator} (${interaction.user.id}) <@${interaction.user.id}>`
                 },
                 {
                     name: "Joined At",

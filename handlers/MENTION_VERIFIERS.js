@@ -3,6 +3,7 @@ const {
     ButtonBuilder,
     EmbedBuilder,
 } = require('discord.js');
+const { escape } = require('../utils/markdown');
 
 exports.run = async (client, interaction, member) => {
 
@@ -59,7 +60,7 @@ Thank you ❤️`,
                 forceStatic: false
             })
         })
-        .setDescription(`<@&${process.env.BETA_VERIFIED}> ${helpMessage} ${interaction.user.tag}`)
+        .setDescription(`<@&${process.env.BETA_VERIFIED}> ${helpMessage} ${escape(interaction.user.tag)}`)
         .setTimestamp()
         .setFooter({
             text: client.user.username + "#" + client.user.discriminator,

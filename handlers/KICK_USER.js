@@ -3,6 +3,7 @@ const {
     EmbedBuilder,
     ButtonBuilder
 } = require('discord.js');
+const { escape } = require('../utils/markdown.js');
 
 exports.run = async (client, interaction, options) => {
     let threadName = interaction.channel.name.split(" | ")
@@ -39,25 +40,25 @@ exports.run = async (client, interaction, options) => {
                 forceStatic: false
             })
         })
-        .setTitle('The user ' + guildMember.user.username + "#" + guildMember.user.discriminator + ' has been kicked from the server.')
+        .setTitle('The user ' + escape(guildMember.user.username) + "#" + guildMember.user.discriminator + ' has been kicked from the server.')
         .setDescription(`Reason ${unable ? "(Unable to Send to User)" : "(Sent to User)"}: \`\`\`${user_reason}\`\`\`\nLogs Reason (Not Shared):\`\`\`${logs_reason}\`\`\``)
         .setTimestamp()
         .setFooter({
-            text: client.user.username + "#" + client.user.discriminator,
+            text: escape(client.user.username) + "#" + client.user.discriminator,
             iconURL: client.user.avatarURL()
         })
         .addFields([{
-                name: 'User Information',
-                value: `${guildMember.user.username}#${guildMember.user.discriminator} (${guildMember.user.id}) <@${guildMember.user.id}>`
-            },
-            {
-                name: 'Verifier Information',
-                value: `${interaction.user.username}#${interaction.user.discriminator} (${interaction.user.id}) <@${interaction.user.id}>`
-            },
-            {
-                name: 'ID\'s',
-                value: `\`\`\`ini\nVerifier = ${interaction.user.id}\nUser = ${interaction.user.id}\nThread = ${interaction.channel.id}\`\`\``
-            }
+            name: 'User Information',
+            value: `${escape(guildMember.user.username)}#${guildMember.user.discriminator} (${guildMember.user.id}) <@${guildMember.user.id}>`
+        },
+        {
+            name: 'Verifier Information',
+            value: `${escape(interaction.user.username)}#${interaction.user.discriminator} (${interaction.user.id}) <@${interaction.user.id}>`
+        },
+        {
+            name: 'ID\'s',
+            value: `\`\`\`ini\nVerifier = ${interaction.user.id}\nUser = ${interaction.user.id}\nThread = ${interaction.channel.id}\`\`\``
+        }
         ])
 
     await client.channels.cache.get(process.env.KICK_LOGS).send({
@@ -65,15 +66,15 @@ exports.run = async (client, interaction, options) => {
         components: [
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
-                .setURL(`https://canary.discord.com/channels/959551566388547676/${interaction.channel.id}`)
-                .setLabel("View Thread")
-                .setStyle(5),
+                    .setURL(`https://canary.discord.com/channels/959551566388547676/${interaction.channel.id}`)
+                    .setLabel("View Thread")
+                    .setStyle(5),
             )
         ],
     })
 
     return interaction.reply({
-        content: "Kicked " + guildMember.user.username + "#" + guildMember.user.discriminator + " from the server.",
+        content: "Kicked " + escape(guildMember.user.username) + "#" + guildMember.user.discriminator + " from the server.",
         ephemeral: true
     })
 

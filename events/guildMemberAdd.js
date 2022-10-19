@@ -2,12 +2,13 @@ const {
     ActionRowBuilder,
     ButtonBuilder,
 } = require('discord.js');
+const { escape } = require('../utils/markdown');
 
 module.exports = async (client, member) => {
     if (member.user.bot) return
 
     member.send({
-        content: `**Hey 👋 Welcome to TransPlace, ${member.user.username}!**
+        content: `**Hey 👋 Welcome to TransPlace, ${escape(member.user.username)}!**
         
 In order to join our community we require that you have a discord avatar set and have claimed your discord account. Claiming your account means you must have your your e-mail verified on discord and have set a user name and password.
 

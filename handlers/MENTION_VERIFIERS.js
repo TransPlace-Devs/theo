@@ -2,11 +2,13 @@ const {
     ActionRowBuilder,
     ButtonBuilder,
     EmbedBuilder,
+    formatEmoji,
 } = require('discord.js');
+const { idFromChannel } = require('../utils/verifyTicketUtils.js');
 
 exports.run = async (client, interaction, member) => {
 
-    if(interaction.user.id != interaction.channel.name.split(" | ")[1]) return interaction.reply({
+    if (interaction.user.id != idFromChannel(interaction.channel.name)) return interaction.reply({
         content: "You are not allowed to use this command, this can only be used by the thread owner.",
         ephemeral: true
     });
@@ -21,12 +23,12 @@ Thank you ❤️`,
         ephemeral: true
     })
 
-    interaction.update({
+    await interaction.update({
         components: [
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder({})
-                .setCustomId(`VERIFY_USER`)
-                .setLabel("Verify User (Staff Only)")
+                .setCustomId(`VERIFIER_ACTIONS`)
+                .setLabel("Verifier Actions (Staff Only)")
                 .setStyle(4),
             ).addComponents(
                 new ButtonBuilder({})
@@ -75,13 +77,19 @@ Thank you ❤️`,
             },
         ])
 
-    interaction.channel.send({
+    await interaction.channel.send({
         content: `<@&${process.env.BETA_VERIFIED}>`,
         embeds: [logEmbed],
         allowedMentions: {
             roles: [process.env.BETA_VERIFIED]
         }
     })
+
+    const maxHeartId = '968321960557809674'; // id of emoji :max_heart: from TransPlace
+    await interaction.followUp({
+        content: `Verifiers have been pinged. Please wait for them to respond ${formatEmoji(maxHeartId)}`, // formatEmoji will return :_: if the bot does not have access to :max_heart: from TransPlace
+        ephemeral: true
+    });
 
 }
 

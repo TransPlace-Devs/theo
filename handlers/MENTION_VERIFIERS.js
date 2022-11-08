@@ -2,6 +2,7 @@ const {
     ActionRowBuilder,
     ButtonBuilder,
     EmbedBuilder,
+    formatEmoji,
 } = require('discord.js');
 const { idFromChannel } = require('../utils/verifyTicketUtils.js');
 
@@ -22,7 +23,7 @@ Thank you ❤️`,
         ephemeral: true
     })
 
-    interaction.update({
+    await interaction.update({
         components: [
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder({})
@@ -76,13 +77,19 @@ Thank you ❤️`,
             },
         ])
 
-    interaction.channel.send({
+    await interaction.channel.send({
         content: `<@&${process.env.BETA_VERIFIED}>`,
         embeds: [logEmbed],
         allowedMentions: {
             roles: [process.env.BETA_VERIFIED]
         }
     })
+
+    const maxHeartId = '968321960557809674'; // id of emoji :max_heart: from TransPlace
+    await interaction.followUp({
+        content: `Verifiers have been pinged. Please wait for them to respond ${formatEmoji(maxHeartId)}`, // formatEmoji will return :_: if the bot does not have access to :max_heart: from TransPlace
+        ephemeral: true
+    });
 
 }
 

@@ -3,10 +3,11 @@ const {
     ButtonBuilder,
     EmbedBuilder,
 } = require('discord.js');
+const { idFromChannel } = require('../utils/verifyTicketUtils.js');
 
 exports.run = async (client, interaction, member) => {
 
-    if(interaction.user.id != interaction.channel.name.split(" | ")[1]) return interaction.reply({
+    if (interaction.user.id != idFromChannel(interaction.channel.name)) return interaction.reply({
         content: "You are not allowed to use this command, this can only be used by the thread owner.",
         ephemeral: true
     });

@@ -2,10 +2,11 @@ const {
     ActionRowBuilder,
     ButtonBuilder
 } = require('discord.js');
+const { idFromChannel } = require('../utils/verifyTicketUtils');
 
 exports.run = async (client, interaction, member) => {
-    let threadName = interaction.channel.name.split(" | ")
-    if (threadName.length != 2) return
+
+    const applicantId = idFromChannel(interaction.channel.name);
 
     // Check if the current member is a verifier
     if (!member.roles.cache.has(process.env.VERIFIERS)) return interaction.reply({
@@ -43,7 +44,7 @@ exports.run = async (client, interaction, member) => {
             ephemeral: true
         })
     }else {
-        let guildMember = await interaction.guild.members.fetch(threadName[1]);
+        let guildMember = await interaction.guild.members.fetch(applicantId);
         if (!guildMember) return interaction.reply({
             content: "Member is no longer apart of guild.",
             ephemeral: true
@@ -55,7 +56,7 @@ exports.run = async (client, interaction, member) => {
         guildMember.roles.add(role)
     
         await interaction.reply({
-            content: `<@${threadName[1]}> has been verified`,
+            content: `<@${applicantId}> has been verified`,
             allowedMentions: {
                 users: [client.user.id],
             }
@@ -176,10 +177,10 @@ exports.run = async (client, interaction, member) => {
         ]
     
         client.channels.cache.get(process.env.WELCOME_CHANNEL).send({
-            content: "<@&978861945253945394>, " + randomMessage[Math.floor(Math.random() * randomMessage.length)].replace("{user}", `<@${threadName[1]}>`),
+            content: "<@&978861945253945394>, " + randomMessage[Math.floor(Math.random() * randomMessage.length)].replace("{user}", `<@${applicantId}>`),
             embeds: [{
                 "title": "Welcome to TransPlace, a place for trans people. " + randomEmoji[Math.floor(Math.random() * randomEmoji.length)],
-                "description": "**Welcome** {user}**! We're glad to finally meet you!**\n*Why don't you check out some of the channels below to get started?*\n\n<#964333907447250975> - Read the Rules!\n<#964279302877241375> - Assign some Roles!\n<#964221571071869050> - Introduce Yourself!".replace("{user}", `<@${threadName[1]}>`),
+                "description": "**Welcome** {user}**! We're glad to finally meet you!**\n*Why don't you check out some of the channels below to get started?*\n\n<#964333907447250975> - Read the Rules!\n<#964279302877241375> - Assign some Roles!\n<#964221571071869050> - Introduce Yourself!".replace("{user}", `<@${applicantId}>`),
                 "color": 16119285,
                 "footer": {
                     "text": "Did you know? : " + randomFact[Math.floor(Math.random() * randomFact.length)]
@@ -191,7 +192,7 @@ exports.run = async (client, interaction, member) => {
         })
     
         let logMessage = await client.channels.cache.get(process.env.LOGS).send({
-            content: `<@${interaction.user.id}> verified <@${threadName[1]}>.`,
+            content: `<@${interaction.user.id}> verified <@${applicantId}>.`,
             allowedMentions: {
                 users: [client.user.id],
             }

@@ -3,12 +3,12 @@ const {
     EmbedBuilder,
     ButtonBuilder
 } = require('discord.js');
+const { idFromChannel } = require('../utils/verifyTicketUtils.js');
 
 exports.run = async (client, interaction, options) => {
-    let threadName = interaction.channel.name.split(" | ")
-    if (threadName.length != 2) return
+    const kickeeId = idFromChannel(interaction.channel.name);
 
-    let guildMember = await interaction.guild.members.fetch(threadName[1]);
+    let guildMember = await interaction.guild.members.fetch(kickeeId);
     if (!guildMember) return interaction.reply({
         content: "Member is no longer apart of guild.",
         ephemeral: true

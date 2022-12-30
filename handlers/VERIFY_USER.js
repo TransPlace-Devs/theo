@@ -43,14 +43,23 @@ exports.run = async (client, interaction, member) => {
             ephemeral: true
         })
     }else {
+        let role = await interaction.guild.roles.fetch(process.env.VERIFIED_ROLE);
+
         let guildMember = await interaction.guild.members.fetch(threadName[1]);
         if (!guildMember) return interaction.reply({
             content: "Member is no longer apart of guild.",
             ephemeral: true
         })
     
-        let role = await interaction.guild.roles.fetch(process.env.VERIFIED_ROLE);
     
+        if (guildMember.roles.has(role)) {
+            return await interaction.reply({
+                content: `<@${threadName[1]}> was already verified`,
+                allowedMentions: {
+                    users: [client.user.id],
+                }
+            })
+        }
         // Add the verified role to the user
         guildMember.roles.add(role)
     
